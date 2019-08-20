@@ -36,5 +36,5 @@ if [ "$action" == "set" ]; then
 elif [ "$action" == "add" ]; then
 	addBackground
 elif [ "$action" == "setup" ]; then
-	sudo apt-get install zenity dmenu feh
+	apt-get install zenity dmenu feh xclip imagemagick
 fi
