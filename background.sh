@@ -17,6 +17,8 @@ setBackground() {
 
         if [ "$XDG_CURRENT_DESKTOP" == "ubuntu:GNOME" ]; then
                 dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
+	elif [ "$XDG_CURRENT_DESKTOP" == "GNOME" ]; then
+		dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
         else
                 feh --bg-scale $output
         fi
