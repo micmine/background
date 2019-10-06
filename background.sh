@@ -1,6 +1,12 @@
 #!/bin/bash
 path=~/Wallpapers
 
+pywal() {
+  if [ -x "$(command -v wal)" ]; then
+    wal -i $fullpath -n
+  fi
+}
+
 setBackground() {
   name=$(ls $path | dmenu -l 12)
   fullpath=$path/$name
@@ -17,13 +23,13 @@ setBackground() {
 
   if [ "$XDG_CURRENT_DESKTOP" == "ubuntu:GNOME" ]; then
     dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
+    pywal
 	elif [ "$XDG_CURRENT_DESKTOP" == "GNOME" ]; then
 		dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
+    pywal
   else
     feh --bg-scale $output
-    if [ -x "$(command -v wal)" ]; then
-      wal -i $fullpath -n
-    fi
+    pywal
   fi
 }
 
