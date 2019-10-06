@@ -21,9 +21,10 @@ setBackground() {
 		dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
   else
     feh --bg-scale $output
-    if [ -x "$(command -v wal)" ]; then
-      wal -i $fullpath -n
-    fi
+  fi
+
+  if [ -x "$(command -v wal)" ]; then
+    wal -i $fullpath -n
   fi
 }
 
