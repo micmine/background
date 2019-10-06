@@ -29,14 +29,10 @@ setBackground() {
     pywal
   else
     feh --bg-scale $output
-<<<<<<< HEAD
   fi
 
   if [ -x "$(command -v wal)" ]; then
     wal -i $fullpath -n
-=======
-    pywal
->>>>>>> 3488b1ce483cde9977b6c25a380ed69c698d1015
   fi
 }
 
