@@ -1,5 +1,6 @@
 #!/bin/bash
 path=~/Wallpapers
+.cache/wal/colors.sh
 
 pywal() {
   if [ -x "$(command -v wal)" ]; then
@@ -8,11 +9,11 @@ pywal() {
 }
 
 setBackground() {
-  name=$(ls $path | dmenu -l 12)
+  name=$(ls $path | rofi -dmenu)
   fullpath=$path/$name
 
   extension=$(echo "$name" | awk -F . '{print $NF}')
-  modifier=$(echo -e "no\nblur" | dmenu -l 2)
+  modifier=$(echo -e "no\nblur" | rofi -dmenu )
   output="/tmp/wallpaper.$extension"
 
   if [ "$modifier" == "no" ]; then
@@ -43,7 +44,7 @@ addBackground() {
 	curl -o $path/$name $url
 }
 
-action=$(echo -e "set\nadd\nsetup" | dmenu -l 3)
+action=$(echo -e "set\nadd\nsetup" | rofi -dmenu)
 
 if [ "$action" == "set" ]; then
 	setBackground
