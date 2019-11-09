@@ -4,22 +4,22 @@ path=~/Wallpapers
 
 pywal() {
   if [ -x "$(command -v wal)" ]; then
-    wal -i $fullpath -n
+    wal -i "$fullpath" -n
   fi
 }
 
 setBackground() {
-  name=$(ls $path | rofi -dmenu)
-  fullpath=$path/$name
+  name=$(ls "$path" | rofi -dmenu)
+  fullpath="$path/$name"
 
   extension=$(echo "$name" | awk -F . '{print $NF}')
-  modifier=$(echo -e "no\nblur" | rofi -dmenu )
+  modifier=$(echo -e "no\\nblur" | rofi -dmenu )
   output="/tmp/wallpaper.$extension"
 
   if [ "$modifier" == "no" ]; then
-    cp $fullpath $output
+    cp "$fullpath" "$output"
   elif [ "$modifier" == "blur" ]; then
-    convert $fullpath -blur 0x8 $output
+    convert "$fullpath" -blur 0x8 "$output"
   fi
 
   if [ "$XDG_CURRENT_DESKTOP" == "ubuntu:GNOME" ]; then
@@ -29,11 +29,8 @@ setBackground() {
 		dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
     pywal
   else
-    feh --bg-scale $output
-  fi
-
-  if [ -x "$(command -v wal)" ]; then
-    wal -i $fullpath -n
+    feh --bg-scale "$output"
+    pywal
   fi
 }
 
@@ -41,10 +38,10 @@ addBackground() {
 	url=$(xclip -selection c -o)
 	name=$(zenity --entry --text "Filename")
 
-	curl -o $path/$name $url
+	curl -o "$path/$name" "$url"
 }
 
-action=$(echo -e "set\nadd\nsetup" | rofi -dmenu)
+action=$(echo -e "set\\nadd\\nsetup" | rofi -dmenu)
 
 if [ "$action" == "set" ]; then
 	setBackground
