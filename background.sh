@@ -6,6 +6,8 @@ pywal() {
   if [ -x "$(command -v wal)" ]; then
     wal -i "$fullpath" -n
   fi
+  ~/.config/glava/change_glava.sh
+  ~/.config/dunst/reload_dunst.sh
 }
 
 setBackground() {
@@ -24,14 +26,12 @@ setBackground() {
 
   if [ "$XDG_CURRENT_DESKTOP" == "ubuntu:GNOME" ]; then
     dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
-    pywal
 	elif [ "$XDG_CURRENT_DESKTOP" == "GNOME" ]; then
 		dconf write "/org/gnome/desktop/background/picture-uri" "'file:///$output'"
-    pywal
   else
     feh --bg-scale "$output"
-    pywal
   fi
+  pywal
 }
 
 addBackground() {
